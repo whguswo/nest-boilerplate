@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { JwtExpireMiddleware, LoggerMiddleware } from './common/middlewares';
 import { JwtModule } from '@nestjs/jwt';
@@ -22,6 +27,9 @@ ConfigModule.forRoot();
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LoggerMiddleware).forRoutes('*');
-    consumer.apply(JwtExpireMiddleware).exclude('/auth/(.*)').forRoutes('*');
+    consumer
+      .apply(JwtExpireMiddleware)
+      .exclude({ path: 'auth/*path', method: RequestMethod.ALL })
+      .forRoutes('*');
   }
 }

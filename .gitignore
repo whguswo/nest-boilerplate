@@ -11,6 +11,21 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+# Yarn Berry (PnP)
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+!.pnp.cjs
+!.pnp.loader.mjs
+
 # OS
 .DS_Store
 
